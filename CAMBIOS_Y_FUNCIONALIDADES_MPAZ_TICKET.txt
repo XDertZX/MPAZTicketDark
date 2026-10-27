@@ -1,0 +1,283 @@
+=====================================================================================
+ MPAZ TICKET – Escuela Escritora Marcela Paz
+ Registro de cambios y funcionalidades del prototipo (Encargo con presentación, Nota 2)
+ Fecha: 25-10-2026
+ Proyecto: D:\MPAZTicket  (Kotlin + Jetpack Compose + Material 3)
+ IMPORTANTE: todos los datos (usuarios, reportes, mensajes, teléfonos y correos) son FICTICIOS.
+=====================================================================================
+
+
+#####################################################################################
+ PARTE 1 – TODO LO QUE SE HIZO (lista de cambios)
+#####################################################################################
+
+0) Respaldo
+   - Antes de modificar se copió el código original del prototipo en:
+     D:\MPAZTicket\respaldo_prototipo_original\
+     (no se compila, está fuera de app/src; sirve para comparar o volver atrás).
+
+1) AGREGADOS GENERALES
+   [x] Barra superior (CenterAlignedTopAppBar) con el nombre de la app al centro: "MPAZ" en blanco
+       y "Ticket" en dorado, fondo azul marino #062451 y franja dorada #B88A00 debajo.
+       Fondo de todas las páginas: blanco.
+   [x] Menú desplegable (Navigation Drawer) en la parte izquierda de la barra superior (ícono ☰).
+       Encabezado azul marino con la inicial/nombre/perfil del usuario y franja dorada.
+       "Cerrar sesión" queda en la parte de abajo del menú.
+   [x] Campana de notificaciones a la derecha de la barra superior con contador dorado.
+   [x] Flecha "Volver" junto al menú en las pantallas internas (detalle, editar, conversación, etc.).
+   [x] Barra inferior dividida en tres: Inicio · Reportes · Cuenta (fondo blanco, íconos grises).
+   [x] Barras de sistema: íconos claros sobre la barra azul y oscuros sobre la barra blanca.
+
+2) AGREGADOS – FUNCIONARIO
+   [x] Menú desplegable con: Mis reportes · Crear Reporte · Contactar a un Administrador ·
+       Cerrar sesión (abajo).
+   [x] "Mis reportes": barra seleccionable partida en dos (Pendientes / Revisados) con contador.
+       Al seleccionar, la lista se actualiza con animación.
+         · Pendientes = reportes en curso (Pendiente, Revisado por TI, Asignado, En proceso).
+         · Revisados  = reportes ya atendidos (Solucionado, Cerrado o Cancelado).
+   [x] Edición de reportes activos (botón "Editar"): agregar detalles del problema, actualizar la
+       gravedad (Baja/Media/Alta) y subir fotos nuevas (opcional, máx. 4 por edición, 12 en total).
+       Cada cambio queda en el historial y el administrador recibe una notificación.
+   [x] "Crear Reporte": abre directo el formulario de creación. Si no hay sesión, al enviar se pide
+       registrarse o iniciar sesión y luego el reporte se envía solo.
+   [x] "Contactar a un Administrador": tarjetas de cada administrador con Correo (abre la app de
+       correo), Teléfono (abre el marcador) y Mensaje (chat interno). Cada llamada, correo o
+       mensaje queda registrado y llega como notificación al panel del administrador.
+       Incluye la lista "Mis conversaciones".
+   [x] Respuesta a solicitudes de información del administrador (con cuenta regresiva del plazo).
+
+3) CAMBIOS – FUNCIONARIO (interfaz)
+   [x] La pantalla principal ahora es un resumen de la funcionalidad de la app:
+       bienvenida, "¿Qué puedes hacer?", "¿Cómo funciona?" (4 pasos) y, si hay sesión,
+       contadores de Pendientes / Revisados / Piden info.
+   [x] Se mantiene el aviso "la app no reemplaza los procedimientos de emergencia" en la parte
+       SUPERIOR de la pantalla.
+   [x] En la misma página de inicio se puede crear un reporte. Antes de enviarlo, si el usuario no
+       ha iniciado sesión, aparece una ventana para Registrarse (como Funcionario) o Iniciar sesión
+       (Funcionario o Administrador).
+   [x] En esa ventana de Registro/Inicio de sesión hay un menú desplegable "Cuentas demo" en la
+       parte superior derecha del recuadro, con las cuentas de demostración.
+   [x] Se agregó al formulario el campo obligatorio "Gravedad" (Baja/Media/Alta).
+
+4) AGREGADOS – ADMINISTRADOR
+   [x] Página de inicio con resumen (ficticio) del mes: reportes del mes, pendientes y resueltos,
+       prioridades más frecuentes (barras animadas, se marca la más frecuente), accesos rápidos y
+       últimas notificaciones.
+   [x] Menú desplegable: Ver reportes · Panel de administrador · Mensajes (con contador de no leídos)
+       · Cerrar sesión (abajo).
+   [x] "Ver reportes": todos los reportes activos con resumen (primeras 3 líneas de la descripción)
+       y botón "Entrar" para ver descripción y detalles. También pestaña "Historial" y filtros
+       (estado, prioridad, categoría, responsable, ubicación y fecha).
+   [x] Dentro del reporte: "Solicitar más información al funcionario". El plazo depende de la
+       prioridad: Alta máx. 2 h · Media máx. 6 h · Baja máx. 8 h. Se muestra cuenta regresiva y
+       "Plazo vencido" si se pasa. El funcionario es notificado y puede responder.
+   [x] "Panel de administrador":
+         · Pestaña Mensual (con flechas para ver meses anteriores): pendientes vs revisados,
+           total por prioridad, categorías que más se repiten (ranking) y subcategoría más repetida.
+         · Pestaña Semestral: 1er semestre (Ene–Jun) o 2do semestre (Jul–Dic), dividido en
+           3 bimestres cada uno (Bimestre 1 a 6 en el año) con totales, prioridades y categoría top.
+         · Botones "Descargar PDF mensual" y "Descargar PDF semestral".
+   [x] "Mensajes": todos los mensajes agrupados por funcionario, con: Responder, Llamar al
+       funcionario, Cerrar mensaje (el funcionario debe enviar una nueva solicitud) y Borrar
+       historial (solo borra las conversaciones cerradas). Muestra además los intentos de contacto
+       (llamadas/correos) de cada funcionario y filtros Todos/Abiertos/Cerrados.
+
+5) FUNCIONALIDADES PREVIAS (cambio)
+   [x] Se quitó la tarjeta de "Cuentas de demostración" de la pantalla de login y se movió al
+       recuadro de Registro / Inicio de sesión como botón desplegable ("Cuentas demo").
+
+6) REQUISITOS DE LA RÚBRICA (Nota 2) – cómo se cubren
+   [x] Diseño visual con Material 3 ............ tema propio M3, Cards, SegmentedButton, Drawer,
+                                                 NavigationBar, chips, diálogos, Badges.
+   [x] Formularios validados ................... reporte, registro, login, editar reporte,
+                                                 mensaje nuevo, solicitud/respuesta de info.
+   [x] Navegación funcional .................... Navigation Compose (14 rutas), menú y barra inferior.
+   [x] Gestión de estado ....................... ViewModel + StateFlow + estados Compose.
+   [x] Almacenamiento local .................... SharedPreferences + JSON (LocalStore.kt).
+   [x] Recursos nativos (archivos PDF/Word) ..... cargar, ver (visor PDF nativo) y eliminar;
+                                                 generación de PDF y exportación a Descargas.
+   [x] Animaciones ............................. transiciones entre pantallas, AnimatedContent,
+                                                 AnimatedVisibility, barras animadas, animateItem,
+                                                 animateContentSize, ícono con rebote al cerrar sesión.
+   [x] Menú · Barra superior e inferior · Vista registrar · Vista iniciar sesión ·
+       Vista cierre de sesión · Cargar / Visualizar / Eliminar documentos (futuro: rúbricas).
+   [ ] Crear repositorio en GitHub y añadir al profesor   -> PENDIENTE (lo debes hacer tú).
+   [ ] Crear tablero en Trello y añadir al profesor        -> PENDIENTE (lo debes hacer tú).
+
+7) EXTRAS QUE AGREGUÉ A MI PARECER (puedes pedir que se cambien)
+   - Campana de notificaciones internas (reporte nuevo, cambio de estado, asignación, comentarios,
+     solicitudes de información, mensajes, llamadas y correos).
+   - Segundo administrador ficticio (Carla Rojas) para que "Contactar a un Administrador" tenga
+     más de un contacto, y 3 funcionarios ficticios más para el historial.
+   - ~70 reportes históricos ficticios generados (siempre los mismos) para que los resúmenes,
+     el panel y los PDF tengan datos de todo el año.
+   - Botón "Restablecer datos de demostración" en Cuenta.
+   - Contraseñas guardadas como hash SHA-256 (nunca en texto plano).
+   - Vista de "Mis documentos" en la pestaña Cuenta y visor de PDF dentro de la app.
+   - Se mantuvo el perfil "Responsable" (Jorge y Marta) porque el caso lo exige; tiene su menú
+     "Tickets asignados".
+   - La prioridad "Urgente" se eliminó para usar solo Baja/Media/Alta (como pediste en los plazos).
+
+8) ARCHIVOS MODIFICADOS / NUEVOS (app\src\main\...)
+   Modificados: MainActivity.kt, data/Models.kt, data/SeedData.kt, data/TicketRepository.kt,
+                data/TicketRules.kt, ui/AppNavigation.kt, ui/AppViewModel.kt,
+                ui/components/Components.kt, ui/screens/HomeScreen.kt, ui/screens/LoginScreen.kt,
+                ui/screens/CreateTicketScreen.kt, ui/screens/TicketDetailScreen.kt,
+                ui/theme/Color.kt, ui/theme/Theme.kt, res/xml/file_paths.xml
+   Nuevos:      data/LocalStore.kt, data/MessageRepository.kt, data/DocumentRepository.kt,
+                data/Stats.kt, data/PdfReports.kt, ui/components/AppBars.kt,
+                ui/screens/ReportsScreens.kt, ui/screens/ContactScreens.kt,
+                ui/screens/AdminPanelScreen.kt, ui/screens/DocumentsScreens.kt,
+                ui/screens/AccountScreens.kt
+   Sin cambios: data/PhotoStorage.kt, ui/theme/Type.kt, build.gradle.kts, AndroidManifest.xml
+                (no se agregaron dependencias ni permisos nuevos).
+
+
+#####################################################################################
+ PARTE 2 – FUNCIONALIDADES DEL CÓDIGO (cómo funciona)
+#####################################################################################
+
+A) CÓMO PROBARLO
+   1. Abre D:\MPAZTicket en Android Studio, espera el Gradle Sync y ejecuta en el emulador.
+   2. La app abre en "Inicio" como invitado (sin sesión).
+   3. Cuentas demo (contraseña 1234), disponibles en el menú "Cuentas demo":
+        Ana Torres   ana@demo.cl    Funcionario
+        Luis Pérez   luis@demo.cl   Funcionario
+        Tomás Vega   tomas@demo.cl  Administrador (Encargado TI)
+        Carla Rojas  carla@demo.cl  Administradora
+        Jorge Núñez  jorge@demo.cl  Responsable (auxiliar)
+        Marta Lagos  marta@demo.cl  Responsable (auxiliar)
+
+   Guion sugerido (presentación):
+     a) Invitado: llena un reporte en Inicio -> Enviar -> aparece la ventana de acceso ->
+        "Cuentas demo" -> Ana -> Ingresar -> el reporte se envía y muestra su código MP-00XX.
+     b) Ana: Reportes -> Pendientes/Revisados -> Editar un reporte (detalle, gravedad, foto).
+        MP-0004 tiene una solicitud de información pendiente: respóndela.
+        Menú -> Contactar a un Administrador -> Llamar / Correo / Mensaje.
+     c) Cerrar sesión (menú, abajo) -> vista de cierre de sesión.
+     d) Tomás: Inicio con resumen del mes -> Ver reportes -> Entrar -> Solicitar más información.
+        Panel de administrador -> Mensual/Semestral -> Descargar PDF -> Ver en la app.
+        Mensajes -> responder, llamar, cerrar, borrar historial de cerrados.
+     e) Cuenta -> Mis documentos -> Cargar un PDF o Word -> Ver -> Eliminar.
+
+B) ARQUITECTURA (capas)
+     ui/ (pantallas Compose)  ->  AppViewModel  ->  Repositorios (StateFlow)  ->  LocalStore (JSON)
+                                                     ^ validan con TicketRules (permisos y estados)
+   - La interfaz nunca modifica datos directamente: pide la acción al ViewModel, este al
+     repositorio, que vuelve a validar permisos y devuelve null (ok) o un mensaje de error.
+   - Cada cambio en un repositorio avisa a StoreEvents y LocalStore guarda todo en el teléfono.
+
+C) CAPA DE DATOS (data/)
+   - Models.kt: modelos (User, Ticket, SolicitudInfo, Conversacion, Mensaje, Notificacion,
+     RegistroContacto, Documento, ReportDraft), enums (Role, Categoria, Prioridad con plazo en
+     horas, EstadoTicket con grupos enCurso/resuelto, TipoComentario), catálogo de categorías y
+     ubicaciones, filtros, Security (hash SHA-256) y Validators (correo, nombre, cargo, teléfono,
+     contraseña).
+   - SeedData.kt: usuarios demo (objeto Users: login, registro, admins, asignables), tickets
+     principales, generador de historial ficticio con semilla fija, conversaciones, contactos y
+     notificaciones iniciales. StoreEvents (aviso de cambios).
+   - TicketRules.kt: permisos por perfil (ver, crear, clasificar, asignar, comentar, evidencia,
+     editar como funcionario, solicitar/responder información, ver conversación) y máquina de
+     estados (Pendiente -> Revisado -> Asignado -> En proceso -> Solucionado -> Cerrado / Cancelado).
+   - TicketRepository.kt: crear, revisar/priorizar, asignar/reasignar, cambiar estado, comentar,
+     evidencia, editar como funcionario, solicitar información (plazo según prioridad) y responder.
+     Genera notificaciones para el funcionario, responsables y administradores.
+   - MessageRepository.kt: notificaciones (crear, marcar leída, leer todas), registro de llamadas
+     y correos, conversaciones (nueva, responder, cerrar, marcar leída, borrar cerradas).
+   - DocumentRepository.kt: importa PDF/Word desde el selector de archivos del sistema (sin
+     permisos), valida tipo y tamaño (15 MB), guarda en filesDir/docs, comparte con FileProvider,
+     registra PDF generados y elimina.
+   - LocalStore.kt: ALMACENAMIENTO LOCAL. Serializa todo a JSON (org.json) en SharedPreferences:
+     cuentas registradas, sesión, tickets, conversaciones, notificaciones, contactos y documentos.
+     Si los datos se dañan vuelve a los datos demo. resetAll() restablece la demo.
+   - Stats.kt: ResumenPeriodo (total, pendientes, revisados, resueltos, cancelados, por prioridad,
+     prioridad más frecuente, ranking de categorías, subcategoría más repetida) y cálculos por mes,
+     semestre y bimestre.
+   - PdfReports.kt: genera los PDF mensual y semestral con la API nativa PdfDocument (encabezado
+     azul/dorado, barras, tabla de reportes, número de página) y los exporta a
+     Descargas/MPAZ Ticket con MediaStore.
+   - PhotoStorage.kt: fotos con cámara/galería en almacenamiento privado (sin cambios).
+
+D) INTERFAZ (ui/)
+   - AppNavigation.kt: Scaffold único con barra superior, barra inferior y menú lateral; NavHost
+     con transiciones animadas. Rutas: home, reports, account, create, contact, admin_panel,
+     messages, notifications, documents, logout, detail/{id}, edit/{id}, conversation/{id},
+     docviewer/{id}.
+   - AppViewModel.kt: GESTIÓN DE ESTADO. Sesión (se recupera al abrir la app), login, registro,
+     logout, filtros y todas las acciones.
+   - components/AppBars.kt: MpazTopBar, MpazBottomBar (Inicio/Reportes/Cuenta) y AppDrawer
+     (opciones según perfil, cerrar sesión abajo).
+   - components/Components.kt: aviso de emergencia, encabezados, tarjetas, StatTile, barras
+     animadas, chips de estado/prioridad/gravedad, banner de plazo con cuenta regresiva, selector
+     Baja/Media/Alta, campos desplegables, diálogos, fotos y utilidades.
+   - screens/HomeScreen.kt: Inicio funcionario/invitado (resumen + crear reporte), Inicio
+     administrador (resumen mensual), Inicio responsable.
+   - screens/CreateTicketScreen.kt: formulario validado reutilizable (Inicio y Crear Reporte) con
+     envío diferido tras registrarse/iniciar sesión.
+   - screens/LoginScreen.kt: panel Iniciar sesión / Registrarse con "Cuentas demo", ventana
+     emergente de acceso y vista de cierre de sesión.
+   - screens/ReportsScreens.kt: Mis reportes (Pendientes/Revisados), Ver reportes (admin, resumen
+     de 3 líneas + Entrar + filtros), tickets asignados y Editar reporte.
+   - screens/TicketDetailScreen.kt: detalle completo, gestión (revisar, asignar, estados),
+     solicitudes de información, evidencia, comentarios e historial.
+   - screens/ContactScreens.kt: Contactar a un Administrador, conversación (chat) y Mensajes
+     del administrador agrupados por funcionario.
+   - screens/AdminPanelScreen.kt: panel mensual / semestral (bimestral) y descarga de PDF.
+   - screens/DocumentsScreens.kt: Mis documentos (cargar, ver, eliminar) y visor de PDF nativo
+     (PdfRenderer).
+   - screens/AccountScreens.kt: Cuenta (perfil, opciones, restablecer demo) y Notificaciones.
+
+E) RECURSOS NATIVOS USADOS (sin permisos peligrosos)
+   - Cámara del sistema (TakePicture) y Photo Picker (galería).
+   - Selector de documentos del sistema (OpenDocument) para PDF y Word.
+   - PdfDocument (crear PDF) y PdfRenderer (ver PDF dentro de la app).
+   - MediaStore Downloads (guardar PDF en Descargas, Android 10+ sin permiso).
+   - FileProvider (compartir archivos privados con otras apps de forma segura).
+   - Intents: ACTION_DIAL (teléfono, no requiere permiso CALL_PHONE), ACTION_SENDTO mailto:
+     (correo) y ACTION_VIEW (abrir documentos).
+
+F) SEGURIDAD Y BUENAS PRÁCTICAS (para la defensa)
+   - Autorización en dos capas (la UI oculta botones y el repositorio vuelve a validar).
+   - Contraseñas con hash SHA-256 + sal por correo; cuentas registradas solo como Funcionario.
+   - Archivos en almacenamiento privado; anti path-traversal con File(name).name.
+   - Sin GPS, sin pagos, sin datos reales, allowBackup=false (se mantuvo).
+   - Límites de texto y validaciones en todos los formularios.
+
+G) LIMITACIONES CONOCIDAS
+   - No hay servidor: los datos viven en el teléfono (cada dispositivo tiene su propia demo).
+   - Las "notificaciones" son internas de la app (no notificaciones push del sistema).
+   - Los archivos Word se abren con una app externa (Word / Google Docs) si está instalada.
+   - El visor PDF interno muestra hasta 12 páginas.
+=====================================================================================
+
+
+#####################################################################################
+ ACTUALIZACIÓN 25-10-2026 – Ajustes según la rúbrica (Ev. Parcial 2 y 3)
+#####################################################################################
+
+1) ÍCONOS EN LOS FORMULARIOS (IE 2.1.2)
+   - Nuevo componente ValidatedTextField (ui/components/Components.kt): cada campo muestra un
+     ícono según su tipo (correo, candado, persona, teléfono, título, etc.), y al validar:
+       · error  -> borde rojo + ícono de error rojo + mensaje bajo el campo
+       · válido -> ícono verde de "campo válido"
+     En las contraseñas hay además un botón para mostrar u ocultar el texto.
+   - DropdownField también muestra el ícono de error o de válido.
+   - Nuevo componente FieldMessage para mensajes con ícono (gravedad, errores generales).
+   - Aplicado en: iniciar sesión, registrarse, crear reporte, editar reporte, responder solicitud
+     de información, nuevo mensaje al administrador, comentarios y diálogos de nota/estado.
+
+2) VALIDACIONES CENTRALIZADAS (IE 2.2.1)
+   - Todas las reglas quedan en el objeto Validators (data/Models.kt): email, emailRegistro,
+     nombre, cargo, telefono, nuevaPassword, passwordLogin, confirmacion, titulo, descripcion,
+     detalleOpcional, asunto, mensaje, respuestaInfo, seleccion, obligatorio, minimo y
+     edicionReporte.
+   - Las pantallas, el ViewModel y los repositorios usan esas mismas funciones: la interfaz solo
+     muestra el resultado y no tiene reglas propias.
+
+3) PRUEBAS UNITARIAS
+   - app/src/test/java/com/fabiancg/bottomappbar/ValidatorsTest.kt: 10 pruebas de las reglas de
+     validación y de los plazos por prioridad. Se ejecutan con el ícono ▶ junto a la clase.
+
+4) README.md
+   - D:\MPAZTicket\README.md con descripción, integrantes (completar nombres), funcionalidades,
+     arquitectura, recursos nativos y permisos, pasos para ejecutar y cuentas demo.

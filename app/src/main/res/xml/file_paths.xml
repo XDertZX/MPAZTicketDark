@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Solo estas carpetas del almacenamiento privado de la app se pueden compartir -->
+    <files-path name="photos" path="photos/" />
+    <!-- Documentos PDF / Word cargados o generados por la app -->
+    <files-path name="docs" path="docs/" />
+</paths>
